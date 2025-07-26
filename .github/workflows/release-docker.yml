@@ -19,10 +19,12 @@ jobs:
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Build Docker image with version tag
+      - name: Build Docker image with version and latest tags
         run: |
           docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/todo-app:${{ github.ref_name }} .
+          docker tag ghcr.io/${{ secrets.GHCR_USERNAME }}/todo-app:${{ github.ref_name }} ghcr.io/${{ secrets.GHCR_USERNAME }}/todo-app:latest
 
-      - name: Push versioned Docker image
+      - name: Push both versioned and latest tags
         run: |
           docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/todo-app:${{ github.ref_name }}
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/todo-app:latest
