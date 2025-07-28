@@ -37,7 +37,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git commit -am "Update image to ${{ github.sha }}"
+          git commit -am "Update image to ${{ github.ref_name }}"
           git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
