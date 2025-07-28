@@ -34,12 +34,10 @@ jobs:
           yq eval '.spec.template.spec.containers[0].image = "ghcr.io/ibraam-nashaat/todo-app:${{ github.sha }}"' -i k8s/base/deployment.yaml
 
       - name: Push manifest changes to main
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git commit -am "Update image to ${{ github.sha }}"
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/Ibraam-Nashaat/Todo-App.git
           git push origin HEAD:main
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
