@@ -31,7 +31,7 @@ jobs:
 
       - name: Update deployment.yaml with new image tag
         run: |
-          yq eval '.spec.template.spec.containers[0].image = "ghcr.io/ibraam-nashaat/todo-app:${{ github.sha }}"' -i k8s/base/deployment.yaml
+          yq eval '.spec.template.spec.containers[0].image = "ghcr.io/${{ secrets.GHCR_USERNAME }}/todo-app:${{ github.ref_name }}"' -i k8s/base/deployment.yaml
 
       - name: Push manifest changes to main
         run: |
