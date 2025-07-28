@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: ghcr.io/ibraam-nashaat/todo-app:v1.1.3
+          image: ghcr.io/ibraam-nashaat/todo-app:v1.1.4
           ports:
             - containerPort: 4000
           envFrom:
