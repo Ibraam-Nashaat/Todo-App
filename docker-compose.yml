@@ -19,8 +19,10 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json
     environment:
       - WATCHTOWER_CLEANUP=true                 # Remove old images
       - WATCHTOWER_POLL_INTERVAL=60            # Check for updates every 60 seconds
       - WATCHTOWER_INCLUDE_STOPPED=true        # Optional: include stopped containers
       - WATCHTOWER_MONITOR_ONLY=false          # Actually apply updates
+      - WATCHTOWER_DEBUG=true                  # Enables verbose logging
