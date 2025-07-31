@@ -55,11 +55,11 @@
         enabled: yes
         state: started
 
-    - name: Install K3s (without traefik)
+    - name: Install K3s 
       shell: |
         curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644 --disable traefik" sh -
       args:
-        creates: /usr/local/bin/k3s  # Idempotency check
+        creates: /usr/local/bin/k3s  # If this file already exists, skip this task
 
     - name: Set KUBECONFIG for all users
       blockinfile:
@@ -69,7 +69,7 @@
         create: yes
         mode: '0644'
 
-    - name: Install kubectl (static version)
+    - name: Install kubectl
       get_url:
         url: "https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl"
         dest: /usr/local/bin/kubectl

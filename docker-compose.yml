@@ -5,7 +5,7 @@ services:
     image: ghcr.io/ibraam-nashaat/todo-app:latest
     ports:
       - "4000:4000"
-    restart: unless-stopped
+    restart: unless-stopped                   # Auto-restarts unless manually stop it.
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000"]
       interval: 30s
@@ -23,6 +23,6 @@ services:
     environment:
       - WATCHTOWER_CLEANUP=true                 # Remove old images
       - WATCHTOWER_POLL_INTERVAL=60            # Check for updates every 60 seconds
-      - WATCHTOWER_INCLUDE_STOPPED=true        # Optional: include stopped containers
-      - WATCHTOWER_MONITOR_ONLY=false          # Actually apply updates
+      - WATCHTOWER_INCLUDE_STOPPED=true        # Check for updates to stopped containers
+      - WATCHTOWER_MONITOR_ONLY=false          # Actually apply updates,  Watchtower will pull updated images, stop old containers, and start new ones.
       - WATCHTOWER_DEBUG=true                  # Enables verbose logging

@@ -13,8 +13,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: default
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated:                      # Enables auto-deploy from Git without manual syncing.
+      prune: true                   # Delete old resources not present in Git anymore.
+      selfHeal: true                # If someone changes the app manually on the cluster, ArgoCD will revert it to match Git.
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=true        # If the destination.namespace (default) doesn't exist, create it automatically

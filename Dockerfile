@@ -8,7 +8,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --production
 
-# Bundle app source
 COPY . .
 
 # App listens on port 4000
